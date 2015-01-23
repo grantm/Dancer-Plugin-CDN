@@ -19,7 +19,18 @@ register cdn_url => sub {
     my($path) = @_;
 
     $cdn ||= _init_cdn();
-    return $cdn->resolve($path);
+    
+    my $new_path;
+    eval {
+        $new_path = $cdn->resolve($path);
+    };
+    
+    if ($@) {
+        Dancer::Logger::warning("Could not process file '$path': " . $@);
+        return $path 
+    }
+    
+    return $new_path;
 };
 
 
