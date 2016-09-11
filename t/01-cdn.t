@@ -57,7 +57,7 @@ chomp(my $url = $resp->{content});
 
 $resp = dancer_response(GET => $url);
 is $resp->{status}, 200, "GET $url => status 200";
-like $resp->{content}, qr/h1 { color: red; }/, 'css/style.css content';
+like $resp->{content}, qr/h1 \{ color: red; \}/, 'css/style.css content';
 
 ok $resp->header('Expires'), 'Expires header';
 ok $resp->header('Last-Modified'), 'Last-Modified header';
